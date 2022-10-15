@@ -4,11 +4,20 @@ public abstract class Person {
     private int id;
     private String name;
     private int age;
-    private String email;
     private String gender;
     private String idCard;
+    private String email;
 
     public Person() {
+    }
+
+    public Person(int id, String name, int age, String gender, String idCard, String email) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.idCard = idCard;
+        this.email = email;
     }
 
     public int getId() {
@@ -35,14 +44,6 @@ public abstract class Person {
         this.age = age;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -57,5 +58,13 @@ public abstract class Person {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -1,10 +1,11 @@
 package controller;
 
+import services.EmployeeServiceImpl;
+
 import java.util.Scanner;
 
 public class FusamaController {
     public static void main(String[] args) {
-
         displayMainMenu();
     }
 
@@ -44,6 +45,7 @@ public class FusamaController {
     }
 
     public static void displayEmployeeMenu() {
+        EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
         boolean check = true;
         while (check) {
             System.out.println("1. Display list employees");
@@ -54,7 +56,18 @@ public class FusamaController {
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
             switch (sc.nextInt()) {
-
+                case 1:
+                    employeeService.display();
+                    break;
+                case 2:
+                    employeeService.addNew();
+                    break;
+                case 3:
+                    employeeService.edit();
+                    break;
+                case 4:
+                    displayMainMenu();
+                    break;
             }
         }
     }
