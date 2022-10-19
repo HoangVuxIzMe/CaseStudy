@@ -67,4 +67,14 @@ public abstract class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + id +
+                ", Name: " + name +
+                ", Age: " + age +
+                ", Gender: " + gender +
+                ", IdCard: " + idCard +
+                ", Email: " + email;
+    }
 }
