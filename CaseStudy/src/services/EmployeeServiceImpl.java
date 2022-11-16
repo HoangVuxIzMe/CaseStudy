@@ -1,19 +1,28 @@
 package services;
 
 import models.Employee;
+import utils.ReadAndWrite;
+import utils.RegexData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImpl implements EmployeeService {
+    //    public static final String regex_str = "^([a-z]+)((\\s{1}[a-z]+){1,})$";
+//    public static final String regex_IdCard = "^([A-Z]{2}-\\d{4})$";
     private static List<Employee> employeeList = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     @Override
     public void display() {
+        ReadAndWrite.readFile("D:\\CaseStudy\\CaseStudy\\src\\data\\employee.csv");
+        int autoSTT = 1;
+        if (employeeList.size() == 0) {
+            System.out.println("Chua co phan tu");
+        }
         for (Employee n : employeeList) {
-            System.out.println("\n" + n.toString());
+            System.out.println("\nSTT: " + autoSTT++ + n.toString());
         }
         System.out.println("_____________________________");
     }
@@ -44,6 +53,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = new Employee(inpId, inpName, inpAge, inpGender, inpIdCard, inpEmail, inpLevel, inpPosition, inpSalary);
         employeeList.add(employee);
+        //Write File
+        ReadAndWrite.writeFile(employeeList, "D:\\CaseStudy\\CaseStudy\\src\\data\\employee.csv");
     }
 
     @Override
@@ -57,73 +68,74 @@ public class EmployeeServiceImpl implements EmployeeService {
         for (Employee employee : employeeList) {
             if (idEdit == employee.getId()) {
                 System.out.println("\nBạn đang sửa ID " + employee.getId() + " nhập lựa chọn của bạn: ");
-                System.out.println("\n1. ID");
-                System.out.println("2. Name");
-                System.out.println("3. Age");
-                System.out.println("4. Gender");
-                System.out.println("5. IdCard");
-                System.out.println("6. Email");
-                System.out.println("7. Level");
-                System.out.println("8. Position");
-                System.out.println("9. Salary");
+                System.out.println("\n1. Name");
+                System.out.println("2. Age");
+                System.out.println("3. Gender");
+                System.out.println("4. IdCard");
+                System.out.println("5. Email");
+                System.out.println("6. Level");
+                System.out.println("7. Position");
+                System.out.println("8. Salary");
                 System.out.println("0. Edit all information.");
 
                 System.out.print("Enter your option: ");
-                int inpOpt = Integer.parseInt(sc.nextLine());
-                System.out.println("_____________________________");
-                switch (inpOpt) {
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    System.out.println("_____________________________");
+                } catch (NumberFormatException e) {
+                    System.out.println("_____________________________");
+                    System.out.println("Nhập sai vui lòng nhập lại!");
+                    System.out.println("_____________________________");
+                }
+                switch (choice) {
                     case 0:
+                        employeeList.remove(employee);
                         addNew();
                         break;
                     case 1:
-                        System.out.print("Enter Id you wanna edit: ");
-                        int inpId = Integer.parseInt(sc.nextLine());
-                        employee.setId(inpId);
-                        System.out.println("_____________________________");
-                        break;
-                    case 2:
                         System.out.print("Enter Name you wanna edit: ");
                         String inpName = sc.nextLine();
                         employee.setName(inpName);
                         System.out.println("_____________________________");
                         break;
-                    case 3:
+                    case 2:
                         System.out.print("Enter Age you wanna edit: ");
                         int inpAge = sc.nextInt();
                         employee.setAge(inpAge);
                         System.out.println("_____________________________");
                         break;
-                    case 4:
+                    case 3:
                         System.out.print("Enter Gender you wanna edit: ");
                         String inpGender = sc.nextLine();
                         employee.setGender(inpGender);
                         System.out.println("_____________________________");
                         break;
-                    case 5:
+                    case 4:
                         System.out.print("Enter IdCard you wanna edit: ");
                         String inpIdCard = sc.nextLine();
                         employee.setIdCard(inpIdCard);
                         System.out.println("_____________________________");
                         break;
-                    case 6:
+                    case 5:
                         System.out.print("Enter Email you wanna edit: ");
                         String inpEmail = sc.nextLine();
                         employee.setEmail(inpEmail);
                         System.out.println("_____________________________");
                         break;
-                    case 7:
+                    case 6:
                         System.out.print("Enter Level you wanna edit: ");
                         String inpLevel = sc.nextLine();
                         employee.setLevel(inpLevel);
                         System.out.println("_____________________________");
                         break;
-                    case 8:
+                    case 7:
                         System.out.print("Enter Position you wanna edit: ");
                         String inpPosition = sc.nextLine();
                         employee.setPosition(inpPosition);
                         System.out.println("_____________________________");
                         break;
-                    case 9:
+                    case 8:
                         System.out.print("Enter Salary you wanna edit: ");
                         int inpSalary = sc.nextInt();
                         employee.setSalary(inpSalary);
@@ -142,7 +154,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         System.out.println("_____________________________");
 
         System.out.print("Nhập ID muốn xóa: ");
-        int idDelete = Integer.parseInt(sc.nextLine());
+        int idDelete = 0;
+        try {
+            idDelete = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("_____________________________");
+            System.out.println("Nhập sai vui lòng nhập lại!");
+            System.out.println("_____________________________");
+        }
         System.out.println("_____________________________");
 
         for (Employee employee : employeeList) {
@@ -153,10 +172,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
                 System.out.println("_____________________________");
                 System.out.print("Nhập lựa chọn của bạn: ");
-                int inpOption = Integer.parseInt(sc.nextLine());
-                System.out.println("_____________________________");
-
-                switch (inpOption) {
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    System.out.println("_____________________________");
+                } catch (NumberFormatException e) {
+                    System.out.println("_____________________________");
+                    System.out.println("Nhập sai vui lòng nhập lại!");
+                    System.out.println("_____________________________");
+                }
+                switch (choice) {
                     case 1:
                         System.out.println("Bạn đã xóa ID " + idDelete + " thành công.");
                         employeeList.remove(employee);

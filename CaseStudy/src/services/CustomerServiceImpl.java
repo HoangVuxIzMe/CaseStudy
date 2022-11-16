@@ -1,7 +1,6 @@
 package services;
 
 import models.Customer;
-import models.Employee;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,10 +12,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void display() {
+        int autoSTT = 1;
         for (Customer n : customerList) {
-            System.out.println("\n" + n.toString());
-            System.out.println("_____________________________");
+            System.out.println("\nSTT: "+ autoSTT++ + n.toString());
         }
+        System.out.println("_____________________________");
     }
 
     @Override
@@ -56,67 +56,67 @@ public class CustomerServiceImpl implements CustomerService {
         for (Customer customer : customerList) {
             if (idEdit == customer.getId()) {
                 System.out.println("\nBạn đang sửa ID " + customer.getId() + " nhập lựa chọn của bạn: ");
-                System.out.println("\n1. ID");
-                System.out.println("2. Name");
-                System.out.println("3. Age");
-                System.out.println("4. Gender");
-                System.out.println("5. IdCard");
-                System.out.println("6. Email");
-                System.out.println("7. Address");
-                System.out.println("8. Customer Type");
+                System.out.println("\n1. Name" + " OBJECT NAME: " + customer.getName());
+                System.out.println("2. Age" + " OBJECT NAME: " + customer.getAge());
+                System.out.println("3. Gender" + " OBJECT NAME: " + customer.getGender());
+                System.out.println("4. IdCard" + " OBJECT NAME: " + customer.getIdCard());
+                System.out.println("5. Email" + " OBJECT NAME: " + customer.getEmail());
+                System.out.println("6. Address" + " OBJECT NAME: " + customer.getAddress());
+                System.out.println("7. Customer Type" + " OBJECT NAME: " + customer.getCustomerType());
                 System.out.println("0. Edit all information.\n");
 
                 System.out.print("Enter your option: ");
-                int inpOpt = Integer.parseInt(sc.nextLine());
-                System.out.println("_____________________________");
-
-                switch (inpOpt) {
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    System.out.println("_____________________________");
+                }catch (NumberFormatException e){
+                    System.out.println("_____________________________");
+                    System.out.println("Nhập sai vui lòng nhập lại!");
+                    System.out.println("_____________________________");
+                }
+                switch (choice) {
                     case 0:
+                        customerList.remove(customer);
                         addNew();
                         break;
                     case 1:
-                        System.out.print("Enter Id you wanna edit: ");
-                        int inpId = Integer.parseInt(sc.nextLine());
-                        customer.setId(inpId);
-                        System.out.println("_____________________________");
-                        break;
-                    case 2:
                         System.out.print("Enter Name you wanna edit: ");
                         String inpName = sc.nextLine();
                         customer.setName(inpName);
                         System.out.println("_____________________________");
                         break;
-                    case 3:
+                    case 2:
                         System.out.print("Enter Age you wanna edit: ");
                         int inpAge = sc.nextInt();
                         customer.setAge(inpAge);
                         System.out.println("_____________________________");
                         break;
-                    case 4:
+                    case 3:
                         System.out.print("Enter Gender you wanna edit: ");
                         String inpGender = sc.nextLine();
                         customer.setGender(inpGender);
                         System.out.println("_____________________________");
                         break;
-                    case 5:
+                    case 4:
                         System.out.print("Enter IdCard you wanna edit: ");
                         String inpIdCard = sc.nextLine();
                         customer.setIdCard(inpIdCard);
                         System.out.println("_____________________________");
                         break;
-                    case 6:
+                    case 5:
                         System.out.print("Enter Email you wanna edit: ");
                         String inpEmail = sc.nextLine();
                         customer.setEmail(inpEmail);
                         System.out.println("_____________________________");
                         break;
-                    case 7:
+                    case 6:
                         System.out.print("Enter Address you wanna edit: ");
                         String inpAddress = sc.nextLine();
                         customer.setAddress(inpAddress);
                         System.out.println("_____________________________");
                         break;
-                    case 8:
+                    case 7:
                         System.out.print("Enter Customer type you wanna edit: ");
                         String inpType = sc.nextLine();
                         customer.setCustomerType(inpType);
@@ -135,7 +135,14 @@ public class CustomerServiceImpl implements CustomerService {
         System.out.println("_____________________________");
 
         System.out.print("Nhập ID muốn xóa: ");
-        int idDelete = Integer.parseInt(sc.nextLine());
+        int idDelete = 0;
+        try{
+            idDelete = Integer.parseInt(sc.nextLine());
+        }catch (NumberFormatException e){
+            System.out.println("_____________________________");
+            System.out.println("Nhập sai vui lòng nhập lại!");
+            System.out.println("_____________________________");
+        }
         System.out.println("_____________________________");
 
         for (Customer customer : customerList) {
@@ -145,10 +152,16 @@ public class CustomerServiceImpl implements CustomerService {
                         "\n2. Không");
 
                 System.out.println("_____________________________");
-                System.out.print("Nhập lựa chọn của bạn: ");
-                int inpOption = Integer.parseInt(sc.nextLine());
-                System.out.println("_____________________________");
-                switch (inpOption) {
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    System.out.println("_____________________________");
+                }catch (NumberFormatException e){
+                    System.out.println("_____________________________");
+                    System.out.println("Nhập sai vui lòng nhập lại!");
+                    System.out.println("_____________________________");
+                }
+                switch (choice) {
                     case 1:
                         System.out.println("Bạn đã xóa ID " + idDelete + " thành công.");
                         customerList.remove(customer);

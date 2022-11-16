@@ -77,4 +77,7 @@ public abstract class Person {
                 ", IdCard: " + idCard +
                 ", Email: " + email;
     }
+    public String getInfo(){
+        return getId() + "," + getName() + "," + getAge() + "," + getGender() + "," + getIdCard() + "," + getEmail();
+    }
 }

@@ -36,10 +36,15 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        return "Customer= " +
+        return ", Customer= " +
                 super.toString() +
                 ", Address: " + address +
                 ", CustomerType: " + customerType +
                 ".";
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + "," + getAddress() + "," + getCustomerType();
     }
 }

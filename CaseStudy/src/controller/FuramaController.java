@@ -1,13 +1,12 @@
 package controller;
 
-import models.Facility;
 import services.CustomerServiceImpl;
 import services.EmployeeServiceImpl;
 import services.FacilityServiceImpl;
 
 import java.util.Scanner;
 
-public class FusamaController {
+public class FuramaController {
     public static void main(String[] args) {
         displayMainMenu();
     }
@@ -15,6 +14,7 @@ public class FusamaController {
     public static void displayMainMenu() {
         boolean check = true;
         while (check) {
+            System.out.println("------- FURAMA MENU -------");
             System.out.println("1. Employee Management");
             System.out.println("2. Customer Management");
             System.out.println("3. Facility Management");
@@ -24,26 +24,28 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
-
-            switch (sc.nextInt()) {
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
                 case 1:
-                    System.out.println("_____________________________");
                     displayEmployeeMenu();
                     break;
                 case 2:
-                    System.out.println("_____________________________");
                     displayCustomerMenu();
                     break;
                 case 3:
-                    System.out.println("_____________________________");
                     displayFacilityMenu();
                     break;
                 case 4:
-                    System.out.println("_____________________________");
                     displayBookingMenu();
                     break;
                 case 5:
-                    System.out.println("_____________________________");
                     displayPromotionMenu();
                     break;
                 case 6:
@@ -58,6 +60,7 @@ public class FusamaController {
         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
         boolean check = true;
         while (check) {
+            System.out.println("------- Employee Menu -------");
             System.out.println("1. Display list employees");
             System.out.println("2. Add new employee");
             System.out.println("3. Edit employee");
@@ -66,8 +69,15 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
-
-            switch (sc.nextInt()) {
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
                 case 1:
                     System.out.println("_____________________________");
                     employeeService.display();
@@ -90,11 +100,11 @@ public class FusamaController {
             }
         }
     }
-
     public static void displayCustomerMenu() {
         CustomerServiceImpl customerService = new CustomerServiceImpl();
         boolean check = true;
         while (check) {
+            System.out.println("------- Customer Menu -------");
             System.out.println("1. Display list customers");
             System.out.println("2. Add new customer");
             System.out.println("3. Edit customer");
@@ -103,8 +113,15 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
-
-            switch (sc.nextInt()) {
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
                 case 1:
                     System.out.println("_____________________________");
                     customerService.display();
@@ -127,11 +144,11 @@ public class FusamaController {
             }
         }
     }
-
     public static void displayFacilityMenu() {
         FacilityServiceImpl facilityService = new FacilityServiceImpl();
         boolean check = true;
         while (check) {
+            System.out.println("------- Facility Menu -------");
             System.out.println("1. Display list facility");
             System.out.println("2. Add new facility");
             System.out.println("3. Display list facility maintenance");
@@ -139,8 +156,15 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
-
-            switch (sc.nextInt()) {
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
                 case 1:
                     System.out.println("_____________________________");
                     facilityService.display();
@@ -151,7 +175,7 @@ public class FusamaController {
                     break;
                 case 3:
                     System.out.println("_____________________________");
-
+                    facilityService.displayListFacilityMaintenance();
                     break;
                 case 4:
                     displayMainMenu();
@@ -165,6 +189,7 @@ public class FusamaController {
         FacilityServiceImpl facilityService = new FacilityServiceImpl();
         boolean check = true;
         while (check) {
+            System.out.println("------- ADD FACILITY -------");
             System.out.println("1. Add new villa");
             System.out.println("2. Add new house");
             System.out.println("3. Add new room");
@@ -172,8 +197,15 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
-
-            switch (sc.nextInt()) {
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
                 case 1:
                     facilityService.addNewVilla();
                     displayFacilityMenu();
@@ -184,7 +216,7 @@ public class FusamaController {
                     break;
                 case 3:
                     facilityService.addNewRoom();
-                    displayAddFacilityMenu();
+                    displayFacilityMenu();
                     break;
                 case 4:
                     System.out.println("_____________________________");
@@ -198,6 +230,7 @@ public class FusamaController {
     public static void displayBookingMenu() {
         boolean check = true;
         while (check) {
+            System.out.println("------- Booking Menu -------");
             System.out.println("1. Add new booking");
             System.out.println("2. Display list booking");
             System.out.println("3. Create new contracts");
@@ -207,27 +240,43 @@ public class FusamaController {
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
+                case 1:
 
-
-            switch (sc.nextInt()) {
-
+                    break;
             }
         }
     }
-
     public static void displayPromotionMenu() {
         boolean check = true;
         while (check) {
+            System.out.println("------- Promotion Menu -------");
             System.out.println("1. Display list customer use service");
             System.out.println("3. Display list customer get voucher");
             System.out.println("4. Return main menu");
 
             System.out.print("Enter your option: ");
             Scanner sc = new Scanner(System.in);
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("_____________________________");
+                System.out.println("Nhập sai vui lòng nhập lại!");
+                System.out.println("_____________________________");
+            }
+            switch (choice) {
+                case 1:
 
-
-            switch (sc.nextInt()) {
-
+                    break;
             }
         }
     }

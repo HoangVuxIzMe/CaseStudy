@@ -10,8 +10,8 @@ public class Room extends Facility{
         this.accompanyService = accompanyService;
     }
 
-    public Room(String nameService, int areaUse, int rentalCost, int maxPerson, String typeRental, String accompanyService) {
-        super(nameService, areaUse, rentalCost, maxPerson, typeRental);
+    public Room(String idService, String nameService, int areaUse, int rentalCost, int maxPerson, String typeRental, String accompanyService) {
+        super(idService, nameService, areaUse, rentalCost, maxPerson, typeRental);
         this.accompanyService = accompanyService;
     }
 
@@ -26,6 +26,7 @@ public class Room extends Facility{
     @Override
     public String toString() {
         return "Room = " +
+                super.toString() +
                 "Accompanied Service: " + accompanyService +
                 '.';
     }
